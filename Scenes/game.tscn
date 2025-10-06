@@ -1,14 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bt6qrp45w75cw"]
+[gd_scene load_steps=5 format=3 uid="uid://bt6qrp45w75cw"]
 
 [ext_resource type="PackedScene" uid="uid://dplop6xl8eiby" path="res://Scenes/box.tscn" id="1_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://c2wh15f85kpu3" path="res://Scenes/Dog.tscn" id="2_wrm1d"]
-[ext_resource type="Texture2D" uid="uid://v8d3acij3p0l" path="res://Assets/Textures/Base Materials 256x256/Concrete/Mat_Concrete_Gray_01-256x256.png" id="3_wrm1d"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3dryh"]
-friction = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wowpa"]
-size = Vector2(256, 100)
+[ext_resource type="PackedScene" uid="uid://bjkiwwfesmri4" path="res://Scenes/Obstacles/Platform.tscn" id="3_3dryh"]
+[ext_resource type="PackedScene" uid="uid://c4h6ygdquxq3u" path="res://Scenes/Portals/Alive_portal.tscn" id="4_3dryh"]
 
 [node name="Game" type="Node2D"]
 
@@ -18,41 +13,17 @@ size = Vector2(256, 100)
 position = Vector2(379, 1235)
 HORIZONTAL_SPEED = 400.0
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Platforms" parent="." instance=ExtResource("3_3dryh")]
 position = Vector2(195, 238)
-physics_material_override = SubResource("PhysicsMaterial_3dryh")
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-modulate = Color(0.34407577, 0.34407574, 0.34407574, 1)
-texture = ExtResource("3_wrm1d")
-region_enabled = true
-region_rect = Rect2(0, 0, 256, 100)
+[node name="Platforms2" parent="." instance=ExtResource("3_3dryh")]
+position = Vector2(195, 484)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_wowpa")
+[node name="Platforms3" parent="." instance=ExtResource("3_3dryh")]
+position = Vector2(535, 484)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(570, 414)
-physics_material_override = SubResource("PhysicsMaterial_3dryh")
+[node name="Platforms4" parent="." instance=ExtResource("3_3dryh")]
+position = Vector2(535, 749)
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
-modulate = Color(0.34407577, 0.34407574, 0.34407574, 1)
-texture = ExtResource("3_wrm1d")
-region_enabled = true
-region_rect = Rect2(0, 0, 256, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-shape = SubResource("RectangleShape2D_wowpa")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(195, 826)
-physics_material_override = SubResource("PhysicsMaterial_3dryh")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
-modulate = Color(0.34407577, 0.34407574, 0.34407574, 1)
-texture = ExtResource("3_wrm1d")
-region_enabled = true
-region_rect = Rect2(0, 0, 256, 100)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-shape = SubResource("RectangleShape2D_wowpa")
+[node name="Alive Portal" parent="." instance=ExtResource("4_3dryh")]
+position = Vector2(407.00003, -146)

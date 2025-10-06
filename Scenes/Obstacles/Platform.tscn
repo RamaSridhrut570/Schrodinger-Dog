@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjkiwwfesmri4"]
+
+[ext_resource type="Texture2D" uid="uid://v8d3acij3p0l" path="res://Assets/Textures/Base Materials 256x256/Concrete/Mat_Concrete_Gray_01-256x256.png" id="1_hgtmt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3dryh"]
+friction = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wowpa"]
+size = Vector2(256, 36)
+
+[node name="Platform" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_3dryh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.34407577, 0.34407574, 0.34407574, 1)
+texture = ExtResource("1_hgtmt")
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wowpa")

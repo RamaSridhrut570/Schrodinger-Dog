@@ -60,10 +60,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6egam"]
-radius = 40.0
+radius = 30.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mmfeu"]
-radius = 52.04
+radius = 44.0
 
 [node name="Dog" type="RigidBody2D" groups=["Player"]]
 z_index = 1
@@ -87,11 +87,11 @@ randomness = 1.0
 process_material = SubResource("ParticleProcessMaterial_sfq7n")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(2, 2)
+scale = Vector2(1.6, 1.6)
 sprite_frames = SubResource("SpriteFrames_ueskb")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.29295906
+frame_progress = 0.9393747
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6egam")
