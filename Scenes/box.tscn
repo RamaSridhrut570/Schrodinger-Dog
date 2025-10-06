@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://dplop6xl8eiby"]
+
+[ext_resource type="Texture2D" uid="uid://ds6v7f6g78tdb" path="res://Assets/Textures/Base Materials 256x256/Plaster/Mat_Plaster_Brown_04-256x256.png" id="1_xkb4e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ego7h"]
+texture = ExtResource("1_xkb4e")
+
+[node name="Box" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -4
+
+[node name="Background" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ego7h")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = -3
+
+[node name="Parallax2D" type="Parallax2D" parent="CanvasLayer2"]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

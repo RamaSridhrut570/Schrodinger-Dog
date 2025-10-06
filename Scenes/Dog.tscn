@@ -1,0 +1,124 @@
+[gd_scene load_steps=15 format=3 uid="uid://c2wh15f85kpu3"]
+
+[ext_resource type="Script" uid="uid://c4hiidy3slij7" path="res://Scripts/Dog(Player).gd" id="1_jdaxo"]
+[ext_resource type="Texture2D" uid="uid://c0y3i41dj22jy" path="res://Assets/Textures/Dog/Dog4.png" id="2_7hme1"]
+[ext_resource type="Texture2D" uid="uid://qtjwyih6t4hj" path="res://Assets/Textures/Dog/Dog1.png" id="2_tda5m"]
+[ext_resource type="Texture2D" uid="uid://cpsarxf0tcl4l" path="res://Assets/Textures/Dog/Dog5.png" id="3_ogv55"]
+[ext_resource type="Texture2D" uid="uid://bbiallfn61j0e" path="res://Assets/Textures/Dog/Dog2.png" id="5_mmfeu"]
+[ext_resource type="AudioStream" uid="uid://b1vxu5vmwbmse" path="res://Assets/Audio/SFX/impactWood_heavy_000.ogg" id="6_mmfeu"]
+[ext_resource type="AudioStream" uid="uid://cg0ivu411oy7s" path="res://Assets/Audio/SFX/dog-bark-179915.mp3" id="6_ogv55"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wyyrq"]
+rough = true
+bounce = 1.0
+
+[sub_resource type="Gradient" id="Gradient_neltm"]
+interpolation_mode = 2
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.0699301)
+colors = PackedColorArray(0.381703, 0.381703, 0.381703, 1, 0.8, 0.545098, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_neltm"]
+gradient = SubResource("Gradient_neltm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sfq7n"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+scale_min = 0.1
+scale_max = 10.0
+color_ramp = SubResource("GradientTexture1D_neltm")
+turbulence_enabled = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ueskb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7hme1")
+}],
+"loop": true,
+"name": &"Died",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ogv55")
+}],
+"loop": true,
+"name": &"Died_ex",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tda5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mmfeu")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6egam"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mmfeu"]
+radius = 52.04
+
+[node name="Dog" type="RigidBody2D" groups=["Player"]]
+z_index = 1
+collision_layer = 2
+collision_mask = 15
+mass = 0.6
+physics_material_override = SubResource("PhysicsMaterial_wyyrq")
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 1.2
+angular_damp = 20.0
+script = ExtResource("1_jdaxo")
+
+[node name="DirVector" type="Line2D" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(0.355314, 0.355314, 0.355314, 1)
+amount = 200
+lifetime = 2.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sfq7n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ueskb")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.29295906
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6egam")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_mmfeu")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_mmfeu")
+volume_db = 10.0
+
+[node name="Sounds" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_ogv55")
+volume_db = 10.0
+pitch_scale = 1.4
+
+[node name="QuantumTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_right = 720
+drag_vertical_enabled = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="QuantumTimer" to="." method="_on_bark_timer_timeout"]
